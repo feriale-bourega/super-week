@@ -1,0 +1,8 @@
+Installez un routeur avec Altorouteur
+Quelques tests pour vérifier si le routeur fonctionne
+Créer une base de données
+Créer les dossiers de l'architecture mvc
+Faire une route pour récupérer l'ensemble des utilisateurs de l'application
+Faire une route "/register" avec le verbe 'GET' et avec le verbe 'POST' pour afficher un formulaire d'inscription
+Faire deux routes "/login" pour la connexion une avec le verbe 'GET' et une avec le verbe 'POST'
+Créer un ensemble de routes avec javascript utilisant fetch et des fonctions asynchrones 
