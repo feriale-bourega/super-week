@@ -14,9 +14,20 @@ $router->map( 'GET', '/users', function(){
     $ControllerUser->getAllUser();
 } , 'users');
   
+$router->map('GET', '/register', function(){
+    require_once (__DIR__ . "/src/View/register.php");
+}, 'registerForm');
 
+$router->map('POST', '/register', function(){
+    require_once (__DIR__ . "/src/View/register.php");
+    $AuthController = new AuthController();
+    $AuthController->authController($_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['password'], $_POST['conf_pass']);})
+   
+    $router->map( 'GET', '/login', function() {
+        require_once (__DIR__ . "/src/View/login.php");
+    }, 'loginForm');
 
-$match = $router->match();
+    $match = $router->match();
 
 if( is_array($match) && is_callable( $match['target'] ) ) {
 	call_user_func_array( $match['target'], $match['params'] ); 
