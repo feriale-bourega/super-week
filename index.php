@@ -27,6 +27,13 @@ $router->map('POST', '/register', function(){
         require_once (__DIR__ . "/src/View/login.php");
     }, 'loginForm');
 
+    $router->map('POST', '/login', function(){
+        require_once (__DIR__ . "/src/View/login.php");
+        $AuthController = new AuthController();
+        $AuthController->connController($_POST['email'], $_POST['password']);
+    }, 'loginInsert');
+
+
     $match = $router->match();
 
 if( is_array($match) && is_callable( $match['target'] ) ) {
