@@ -41,4 +41,12 @@ class ModelUser
     }
 }
 
+public function rowCountUser($email) {
+    $req = $this->getConn()->prepare("SELECT * FROM user WHERE email = :email ");
+    $req->execute([
+        ":email" => $email
+    ]);
+
+    return $req->rowCount();
+}
 ?>
