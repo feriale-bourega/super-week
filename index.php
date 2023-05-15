@@ -42,6 +42,14 @@ $router->map('POST', '/register', function(){
         require_once (__DIR__ . "/src/View/book.php");
     }, 'bookForm');
 
+    $router->map('POST', '/books/write', function(){
+        require_once (__DIR__ . "/src/View/book.php");
+        $BookController = new BookController();
+        $UserController = new ControllerUser();
+        $user = $UserController->getOneUserById($_SESSION['user']['id']);
+        $BookController->bookController($_POST['title'], $_POST['content'], $user['id']);
+    }, 'bookInsert');
+    
     $match = $router->match();
 
 if( is_array($match) && is_callable( $match['target'] ) ) {
