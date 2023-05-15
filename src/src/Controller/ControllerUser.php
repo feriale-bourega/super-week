@@ -32,5 +32,11 @@ class ControllerUser
         echo json_encode($ModelUser->getUserDB(),JSON_PRETTY_PRINT);
         die();
     }
+
+    public function getOneUser($id):object  {
+        $ModelUser = new ModelUser();
+        echo json_encode($ModelUser->getUserById($id),JSON_PRETTY_PRINT);
+        die();
+    }
     }
     ?>
