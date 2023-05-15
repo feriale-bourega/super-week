@@ -38,6 +38,10 @@ $router->map('POST', '/register', function(){
         $UserController->getOneUser($id);
     }, 'usersInfo');
 
+    $router->map( 'GET', '/books/write', function() {
+        require_once (__DIR__ . "/src/View/book.php");
+    }, 'bookForm');
+
     $match = $router->match();
 
 if( is_array($match) && is_callable( $match['target'] ) ) {
