@@ -60,6 +60,11 @@ $router->map('POST', '/register', function(){
         $BookController->getBookById($id);
     }, 'booksId');
 
+    $router->map( 'GET', '/logout', function() {
+        require_once (__DIR__ . "/src/View/disconnect.php");
+    }, 'disconnect');
+
+
     $match = $router->match();
 
 if( is_array($match) && is_callable( $match['target'] ) ) {
