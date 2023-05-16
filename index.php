@@ -50,6 +50,11 @@ $router->map('POST', '/register', function(){
         $BookController->bookController($_POST['title'], $_POST['content'], $user['id']);
     }, 'bookInsert');
     
+    $router->map( 'GET', '/books', function() {
+        $BookController = new BookController();
+        $BookController->getAllBook();
+    }, 'books');
+    
     $match = $router->match();
 
 if( is_array($match) && is_callable( $match['target'] ) ) {
