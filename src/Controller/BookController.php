@@ -18,4 +18,11 @@ class BookController
         }
 
     }
+
+    public function getAllBook() {
+        $BookModel = new BookModel();
+        echo json_encode($BookModel->getAllBooks(), JSON_PRETTY_PRINT);
+        die();
+    }
+
 }
