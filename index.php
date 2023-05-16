@@ -21,9 +21,41 @@ $router->map('GET', '/register', function(){
 $router->map('POST', '/register', function(){
     require_once (__DIR__ . "/src/View/register.php");
     $AuthController = new AuthController();
-    $AuthController->authController($_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['password'], $_POST['conf_pass']);
+    $AuthController->authController($_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['password'], $_POST['conf_pass']);})
+   
+    $router->map( 'GET', '/login', function() {
+        require_once (__DIR__ . "/src/View/login.php");
+    }, 'loginForm');
 
-$match = $router->match();
+    $router->map('POST', '/login', function(){
+        require_once (__DIR__ . "/src/View/login.php");
+        $AuthController = new AuthController();
+        $AuthController->connController($_POST['email'], $_POST['password']);
+    }, 'loginInsert');
+
+    $router->map('GET', '/users/[i:id]', function($id) {
+        $UserController = new ControllerUser();
+        $UserController->getOneUser($id);
+    }, 'usersInfo');
+
+    $router->map( 'GET', '/books/write', function() {
+        require_once (__DIR__ . "/src/View/book.php");
+    }, 'bookForm');
+
+    $router->map('POST', '/books/write', function(){
+        require_once (__DIR__ . "/src/View/book.php");
+        $BookController = new BookController();
+        $UserController = new ControllerUser();
+        $user = $UserController->getOneUserById($_SESSION['user']['id']);
+        $BookController->bookController($_POST['title'], $_POST['content'], $user['id']);
+    }, 'bookInsert');
+    
+    $router->map( 'GET', '/books', function() {
+        $BookController = new BookController();
+        $BookController->getAllBook();
+    }, 'books');
+    
+    $match = $router->match();
 
 if( is_array($match) && is_callable( $match['target'] ) ) {
 	call_user_func_array( $match['target'], $match['params'] ); 
